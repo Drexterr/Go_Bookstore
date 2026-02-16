@@ -4,20 +4,24 @@ import (
 	"log"
 
 	"github.com/Bharat/go-bookstore/initializers"
+	"github.com/Bharat/go-bookstore/middleware"
 	"github.com/Bharat/go-bookstore/pkg/routes"
 	"github.com/gin-gonic/gin"
 )
 
 func init() {
 	initializers.LoadEnvVariables()
+	initializers.Logger()
 	initializers.Connect()
 	initializers.SyncDatabase()
 }
 
 func main() {
+	defer initializers.Log.Sync()
 
-	r := gin.Default()
-
+	r := gin.New()
+	r.Use(middleware.ZapLogger())
+	r.Use(gin.Recovery())
 	routes.RegisterBookstoreRoutes(r)
 
 	log.Println("Starting Gin server on localhost:8080...")
