@@ -14,6 +14,7 @@ func init() {
 	initializers.Logger()
 	initializers.Connect()
 	initializers.SyncDatabase()
+	initializers.InitGoth()
 }
 
 func main() {
