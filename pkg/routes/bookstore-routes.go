@@ -12,7 +12,9 @@ var RegisterBookstoreRoutes = func(router *gin.Engine) {
 	router.GET("/bookstore/:Store_id", controllers.GetBookByStoreId)
 	router.GET("/bookstore/:Store_id/:id", controllers.GetBookByID)
 	router.GET("/bookstore/:Store_id/:id/Price", controllers.GetPriceByID)
-
+	router.GET("/auth/:provider", controllers.OauthLogin)
+	router.GET("/auth/:provider/callback", controllers.OauthCallback)
+	router.GET("/auth/:provider/logout", controllers.OauthLogout)
 	router.POST("/signup", controllers.SignUp)
 	router.POST("/login", controllers.Login)
 
